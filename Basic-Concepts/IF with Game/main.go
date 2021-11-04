@@ -44,7 +44,7 @@ func main() {
 
 		fmt.Print("Please enter rock, paper, or scissors -> ")
 		playerChoice, _ = reader.ReadString('\n')
-		playerChoice = strings.Replace(playerChoice, "\n", "", -1)
+		playerChoice = strings.Replace(playerChoice, "\r\n", "", -1)
 
 		// moved computer choice to for loop, so it's reset each time through
 		computerValue := rand.Intn(3)
