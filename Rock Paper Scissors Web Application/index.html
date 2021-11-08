@@ -15,7 +15,7 @@
 
         <p id="player_choice">&nbsp;</p>
         <p id="computer_choice">&nbsp;</p>
-        <p id="round_result">&nbsp;</p>
+        <p class="text-danger" id="round_result">&nbsp;</p>
 
         <hr>
         <p>Choose rock, paper, or scissors!</p>
@@ -30,14 +30,20 @@
 
 <script>
     function choose(x) {
-        if (x == 0) {
-            document.getElementById("player_choice").innerHTML = "You clicked rock";
-        } else if (x == 1) {
-            document.getElementById("player_choice").innerHTML = "You clicked paper";
-        } else {
-            document.getElementById("player_choice").innerHTML = "You clicked scissors";
-        }
-        
+        fetch("/play?c=" + x)
+        .then(response => response.json())
+
+        .then(data => {
+            if (x == 0) {
+                document.getElementById("player_choice").innerHTML = "Player clicked ROCK";
+            } else if (x == 1) {
+                document.getElementById("player_choice").innerHTML = "Player clicked PAPER";
+            } else {
+                document.getElementById("player_choice").innerHTML = "Player clicked SCISSORS";
+            }
+            document.getElementById("computer_choice").innerHTML = data.computer_choice;
+            document.getElementById("round_result").innerHTML = data.round_result;
+        })        
     }
 </script>
 
